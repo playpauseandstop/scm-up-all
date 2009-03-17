@@ -1,7 +1,7 @@
 Introduction
 ============
 
-``scm-up-all.py`` is script to update all SCMs (Bazaar, Git, Git SVN,
+``scm-up-all.py`` is script to update all SCMs (Bazaar, Darcs, Git, Git SVN,
 Mercurial, Subversion) directories located in your shared packages directory.
 
 For example, I was cloned several Bazaar, Git, Mercurial and Subversion
@@ -12,6 +12,7 @@ repositories to ``/srv/shared``:
       + django_xmlrpc
       + git-sh
       + jinja2
+      + twill
 
 And for updating all of these directories I need to typo:
 
@@ -19,6 +20,7 @@ And for updating all of these directories I need to typo:
     $ cd /srv/shared/django_xmlrpc && bzr pull
     $ cd /srv/shared/git-sh && git pull
     $ cd /srv/shared/jinja2 && hg fetch
+    $ cd /srv/shared/twill && darcs pull -a
 
 But, with ``scm-up-all.py`` I need only to set ``/srv/shared`` as first
 argument and all supported SCMs directories will be updated automatic:
