@@ -22,6 +22,7 @@ def run():
     not_scms = []
     scms = (
         ('bzr', []),
+        ('darcs', []),
         ('git', []),
         ('git-svn', []),
         ('hg', []),
@@ -42,17 +43,19 @@ def run():
 
         if '.bzr' in subdirdata:
             scms[0][1].append(subdirname)
+        elif '_darcs' in subdirdata:
+            scms[1][1].append(subdirname)
         elif '.git' in subdirdata:
             f = open(os.path.join(subdirname, '.git/config'), 'r')
             if not 'svn-remote' in f.read():
-                scms[1][1].append(subdirname)
-            else:
                 scms[2][1].append(subdirname)
+            else:
+                scms[3][1].append(subdirname)
             f.close()
         elif '.hg' in subdirdata:
-            scms[3][1].append(subdirname)
-        elif '.svn' in subdirdata:
             scms[4][1].append(subdirname)
+        elif '.svn' in subdirdata:
+            scms[5][1].append(subdirname)
         else:
             scms_len -= 1
             not_scms.append(subdirname)
@@ -71,7 +74,9 @@ def run():
 
     for protocol, dirs in scms:
         if protocol == 'bzr':
-            cmd = "cd '%s' && bzr pull"
+            cmd = "cd '%s' && bzr upgrade"
+        elif protocol == 'darcs':
+            cmd = "cd '%s' && darcs pull"
         elif protocol == 'git':
             cmd = "cd '%s' && git pull"
         elif protocol == 'git-svn':
@@ -83,9 +88,9 @@ def run():
 
         dirs.sort()
 
-        for d in dirs:
-            print '$', cmd % d
-            os.system(cmd % d)
+        for dirname in dirs:
+            print '$', cmd % dirname
+            os.system(cmd % dirname)
             print
 
 if __name__ == '__main__':
