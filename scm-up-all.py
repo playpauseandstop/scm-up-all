@@ -74,7 +74,7 @@ def run():
 
     for protocol, dirs in scms:
         if protocol == 'bzr':
-            cmd = "cd '%s' && bzr upgrade"
+            cmd = "cd '%s' && bzr pull"
         elif protocol == 'darcs':
             cmd = "cd '%s' && darcs pull -a"
         elif protocol == 'git':
