@@ -76,7 +76,7 @@ def run():
         if protocol == 'bzr':
             cmd = "cd '%s' && bzr upgrade"
         elif protocol == 'darcs':
-            cmd = "cd '%s' && darcs pull"
+            cmd = "cd '%s' && darcs pull -a"
         elif protocol == 'git':
             cmd = "cd '%s' && git pull"
         elif protocol == 'git-svn':
