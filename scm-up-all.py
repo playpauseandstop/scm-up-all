@@ -82,7 +82,7 @@ def run():
         elif protocol == 'git-svn':
             cmd = "cd '%s' && git svn fetch"
         elif protocol == 'hg':
-            cmd = "cd '%s' && hg pull"
+            cmd = "cd '%s' && hg pull && hg update"
         elif protocol == 'svn':
             cmd = "svn update '%s'"
 
